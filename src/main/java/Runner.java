@@ -1,8 +1,10 @@
+import by.epam.training.DataConfig;
 import by.epam.training.beans.Comment;
 import by.epam.training.beans.User;
 import by.epam.training.services.CommentService;
 import by.epam.training.services.UserService;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -13,7 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Runner {
     private static final ApplicationContext ANNO_CONTEXT =
-            new ClassPathXmlApplicationContext("config.xml");
+            new AnnotationConfigApplicationContext(DataConfig.class);
+            //new ClassPathXmlApplicationContext("config.xml");
 
     private static UserService userService =
             ANNO_CONTEXT.getBean(UserService.class);
