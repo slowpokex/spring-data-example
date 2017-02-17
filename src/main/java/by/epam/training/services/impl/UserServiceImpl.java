@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        userRepository.addUser(user);
+        userRepository.saveAndFlush(user);
         return user;
     }
 
@@ -41,11 +41,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editUser(User user) {
-        userRepository.editUser(user);
+        userRepository.saveAndFlush(user);
     }
 
     @Override
     public List<User> getAll() {
-        return userRepository.getAll();
+        return userRepository.findAll();
     }
 }

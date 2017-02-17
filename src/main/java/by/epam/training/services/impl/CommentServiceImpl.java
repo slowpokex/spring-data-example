@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment addComment(Comment comment) {
-        Comment savedComment = commentRepository.addComment(comment);
+        Comment savedComment = commentRepository.save(comment);
         return savedComment;
     }
 
@@ -42,11 +42,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment editComment(Comment comment) {
-        return commentRepository.editComment(comment);
+        return commentRepository.saveAndFlush(comment);
     }
 
     @Override
     public List<Comment> getAll() {
-        return commentRepository.getAll();
+        return commentRepository.findAll();
     }
 }

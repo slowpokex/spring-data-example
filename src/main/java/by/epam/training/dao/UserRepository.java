@@ -1,6 +1,8 @@
 package by.epam.training.dao;
 
 import by.epam.training.beans.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,11 +15,6 @@ import java.util.List;
  * Creation date: 15.02.2017
  */
 
-public interface UserRepository {
-    void addUser(User user);
+public interface UserRepository extends JpaRepository<User, Integer> {
     User findByLogin(String login);
-    void delete(int id);
-    void editUser(User user);
-    List<User> getAll();
-
 }
