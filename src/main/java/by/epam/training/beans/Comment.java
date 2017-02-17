@@ -3,6 +3,7 @@ package by.epam.training.beans;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
@@ -22,26 +23,28 @@ public class Comment {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH})
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Basic(optional = false)
-    @Column(name = "timestamp", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date datetime;
+
+    @Column(name="timestamp",
+            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+            insertable=false,
+            updatable=false)
+    private Timestamp datetime;
 
     @Column(name = "message")
     private String message;
 
-    public Comment(User user, Date datetime, String message) {
+    public Comment(User user, String message) {
         this.user = user;
-        this.datetime = datetime;
+        this.datetime = new Timestamp(System.currentTimeMillis());
         this.message = message;
     }
 
     public Comment() {
-        this(new User(),new Date(),"");
+        this(new User(),"");
     }
 
     public int getId() {
@@ -66,7 +69,7 @@ public class Comment {
         return datetime;
     }
 
-    public Comment setDatetime(Date datetime) {
+    public Comment setDatetime(Timestamp datetime) {
         this.datetime = datetime;
         return this;
     }

@@ -1,3 +1,4 @@
+import by.epam.training.beans.Comment;
 import by.epam.training.beans.User;
 import by.epam.training.services.CommentService;
 import by.epam.training.services.UserService;
@@ -21,10 +22,14 @@ public class Runner {
             ANNO_CONTEXT.getBean(CommentService.class);
 
     public static void main(String[] args) {
-        User newUser = new User("lotysh","spring", User.Roles.ADMIN);
+        User newUser = new User("isakau","spring", User.Roles.ADMIN);
         userService.addUser(newUser);
-        for (User user : userService.getAll()) {
-            System.out.println(user);
+        User isakau = userService.getByLogin("isakau");
+        Comment comment =
+                new Comment(isakau, "Hello, Valera!");
+        commentService.addComment(comment);
+        for (Comment comment1 : commentService.getAll()) {
+            System.out.println(comment1);
         }
     }
 }

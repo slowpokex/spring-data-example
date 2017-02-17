@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public List<User> getByLoginLike(String login) {
+        return userRepository.findByLoginLike(login);
+    }
 }

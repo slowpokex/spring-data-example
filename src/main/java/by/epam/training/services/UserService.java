@@ -16,4 +16,5 @@ public interface UserService {
     User getByLogin(String login);
     void editUser(User user);
     List<User> getAll();
+    List<User> getByLoginLike(String login);
 }
